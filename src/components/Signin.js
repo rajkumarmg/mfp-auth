@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
+import { login, getAllUsers } from '../service/User.service';
 
 function Copyright() {
   return (
@@ -52,7 +53,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn({ onSignIn }) {
   const classes = useStyles();
-
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    var { email, password } = document.forms[0];
+    // Make a request for a user with a given ID
+    login({
+      "username": email.value,
+      "password": password.value
+    }).then(res => { // handle success
+      console.log(res);
+      onSignIn();
+    })
+      .catch(error => {// handle error
+        console.log(error);
+      })
+      .then(() => {// always executed
+        console.log('always');
+      });
+  };
+ 
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -63,7 +82,7 @@ export default function SignIn({ onSignIn }) {
           Sign in
         </Typography>
         <form
-          onSubmit={(e) => e.preventDefault()}
+          onSubmit={handleSubmit}
           className={classes.form}
           noValidate
         >
@@ -99,7 +118,7 @@ export default function SignIn({ onSignIn }) {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick={onSignIn}
+            
           >
             Sign In
           </Button>

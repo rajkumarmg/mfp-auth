@@ -5,7 +5,7 @@ Assuming you already have nodejs installed.
 Run the following command one by one.
 ```
 git clone https://github.com/rajkumarmg/mfp-auth.git
-cd mfp-dashboard
+cd mfp-auth
 npm i
 npm start
 ```
