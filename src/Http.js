@@ -9,6 +9,6 @@ let instance = axios.create({
 });
 const isDevEnv = window.location.href.includes('localhost') ? true : false;
 if (isDevEnv) {
-   initializeAxiosMockAdapter(instance);
+   // initializeAxiosMockAdapter(instance);
 }
 export const Http = instance;

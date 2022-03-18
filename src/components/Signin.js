@@ -62,7 +62,14 @@ export default function SignIn({ onSignIn }) {
       "password": password.value
     }).then(res => { // handle success
       console.log(res);
-      onSignIn();
+      if(onSignIn){
+        onSignIn({
+          access_token: res.data.access_token,
+        });
+      } else {
+        console.log('in dev mode');
+      }
+      
     })
       .catch(error => {// handle error
         console.log(error);
